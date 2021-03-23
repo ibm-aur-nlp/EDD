@@ -235,3 +235,14 @@ This will save the inference result (HTML code) of every testing sample in `{RES
 }
 ```
 The json file can be compared agains the ground truth using the code [here](https://github.com/ibm-aur-nlp/PubTabNet/tree/master/src). The ground truth of test set has been kept secret.
+
+## Cite us
+
+```
+@article{zhong2019image,
+  title={Image-based table recognition: data, model, and evaluation},
+  author={Zhong, Xu and ShafieiBavani, Elaheh and Yepes, Antonio Jimeno},
+  journal={arXiv preprint arXiv:1911.10683},
+  year={2019}
+}
+```
