@@ -168,14 +168,21 @@ with open(os.path.join(args.out_dir, 'WORDMAP_' + base_filename + '.json'), 'w')
     json.dump({"word_map_tag": word_map_tag, "word_map_cell": word_map_cell}, j)
 
 with h5py.File(os.path.join(args.out_dir, 'TRAIN_IMAGES_' + base_filename + '.hdf5'), 'a') as h:
+    dataset_name = 'images'
+    
+    # Check if the dataset already exists and delete it if it does
+    if dataset_name in h:
+        del h[dataset_name]
+    
     # Create dataset inside HDF5 file to store images
-    images = h.create_dataset('images', (len(train_image_paths), 3, args.image_size, args.image_size), dtype='uint8')
+    images = h.create_dataset(dataset_name, (len(train_image_paths), 3, args.image_size, args.image_size), dtype='uint8')
 
     enc_tags = []
     tag_lens = []
     enc_cells = []
     cell_lens = []
     cell_bboxes = []
+    
     for i, path in enumerate(tqdm(train_image_paths)):
         # Read images
         img, orig_size = image_rescale(train_image_paths[i], args.image_size, args.keep_AR, return_size=True)
