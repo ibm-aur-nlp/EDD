@@ -255,13 +255,13 @@ def image_resize(imagepath, image_size, keep_AR=True):
         if keep_AR:
             ratio = float(image_size) / max(old_size)
             new_size = tuple([int(x * ratio) for x in old_size])
-            im = im.resize(new_size, Image.ANTIALIAS)
+            im = im.resize(new_size, Image.Resampling.LANCZOS)
             delta_w = image_size - new_size[0]
             delta_h = image_size - new_size[1]
             padding = (delta_w // 2, delta_h // 2, delta_w - (delta_w // 2), delta_h - (delta_h // 2))
             new_im = ImageOps.expand(im, padding)
         else:
-            new_im = im.resize((image_size, image_size), Image.ANTIALIAS)
+            new_im = im.resize((image_size, image_size), Image.Resampling.LANCZOS)
         return new_im, old_size
 
 def image_rescale(imagepath, image_size, keep_AR=True, transpose=True, return_size=False):
