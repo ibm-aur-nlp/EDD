@@ -157,7 +157,7 @@ if __name__ == '__main__':
     parser.add_argument('--predict_bbox', dest='predict_bbox', default=False, action='store_true', help='Predict cell bbox')
 
     args = parser.parse_args()
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # sets device for model and PyTorch tensors
+    device = torch.device("cuda" if torch.cuda.is_available()  else "mps" if torch.backends.mps.is_available() else "cpu")  # sets device for model and PyTorch tensors
     cudnn.benchmark = True  # set to true only if inputs to model are fixed size; otherwise lot of computational overhead
 
     # Read word map
